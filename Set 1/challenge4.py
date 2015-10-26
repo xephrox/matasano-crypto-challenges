@@ -17,14 +17,14 @@ def decodefile(filename):
         yield s
 
 def findXORLine(generator):
-    lines = [strxor_c(l, challenge3.answer(l)) for l in generator]
+    lines = [challenge3.answer(l)[1] for l in generator]
     def compfunc(i):
         return challenge3.englishness(lines[i])
     maxI = max(range(len(lines)), key=compfunc)
     return lines[maxI]
-if __name__ == '__main__':
-    print findXORLine(decodefile('extra/4.txt'))
 
+print (findXORLine(decodefile('extra/4.txt')).decode("ascii"))
 
+        
 
 

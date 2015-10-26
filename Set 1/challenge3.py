@@ -41,19 +41,16 @@ FREQUENCY_TABLE = {
 def englishness(a):
     c = Counter(a.lower())
     total_characters = len(a)
-    coefficient = sum(math.sqrt(FREQUENCY_TABLE.get(char, 0) * y/total_characters) for char,y in c.items())
+    coefficient = sum(math.sqrt(FREQUENCY_TABLE.get(bytes([char]), 0) * y/total_characters) for char,y in c.items())
     return coefficient
 
 def answer(s):
-    maxval = 0
-    index = 0
-    for i in range(0,256):
-        maxval1 = maxval
-        maxval = max(maxval, englishness(strxor_c(s, i)))
-        if maxval1 != maxval:
-            index = i
-    return index
-if __name__ == "__main__":
-    encodedS = '1b37373331363f78151b7f2b783431333d78397828372d363c78373e783a393b3736'
+    print (s)
+    def compfunc(items):
+        return englishness(items[1])
+    return max([(i, strxor_c(s,i)) for i in range(0,256)], key = compfunc)
+
+if __name__ == '__main__':
+    encodedS = b'1b37373331363f78151b7f2b783431333d78397828372d363c78373e783a393b3736'
     S = binascii.unhexlify(encodedS)
-    print strxor_c(S, answer(S))
+    print (answer(S))
