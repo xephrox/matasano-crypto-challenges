@@ -22,3 +22,4 @@ if __name__ == "__main__":
         raise Exception("Incorrect Answer")
     else:
         print (Y)
+        print (len(Y))
